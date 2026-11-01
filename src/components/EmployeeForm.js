@@ -1,11 +1,11 @@
 import '../EmployeeForm.css';
 import React, { useState } from 'react';
 
-function EmployeeForm() {
+function EmployeeForm(props) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    jobTitle: '',
+    phone: '',
   });
 
   // Step 6: update state when an input changes
@@ -14,11 +14,16 @@ function EmployeeForm() {
     setFormData({ ...formData, [name]: value });
   };
 
-  // Step 7: runs when the form is submitted
+  // Step 7: send the new employee up to App, then clear the form
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Employee submitted:', formData);
-    alert(`Saved ${formData.name}`);
+    props.onSubmit({
+      EmployeeId: Date.now(),
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+    });
+    setFormData({ name: '', email: '', phone: '' });
   };
 
   // Step 5: inputs and submit button
@@ -49,11 +54,11 @@ function EmployeeForm() {
       <br />
 
       <label>
-        Job Title:
+        Phone:
         <input
-          type="text"
-          name="jobTitle"
-          value={formData.jobTitle}
+          type="tel"
+          name="phone"
+          value={formData.phone}
           onChange={handleChange}
         />
       </label>
