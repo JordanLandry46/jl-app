@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import EmployeeForm from './components/EmployeeForm';
+import EmployeeList from './components/EmployeeList';
 
 function App() {
   // Load saved employees from local storage, or start with an empty list
@@ -24,6 +25,7 @@ function App() {
   return (
     <div className="App">
       <EmployeeForm onSubmit={addEmployee} />
+      <EmployeeList employees={employees} />
     </div>
   );
 }
