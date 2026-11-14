@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeeList from './components/EmployeeList';
+import EmployeeDetail from './components/EmployeeDetail';
 
 function App() {
   // Load saved employees from local storage, or start with an empty list
@@ -24,8 +26,21 @@ function App() {
 
   return (
     <div className="App">
-      <EmployeeForm onSubmit={addEmployee} />
-      <EmployeeList employees={employees} />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <EmployeeForm onSubmit={addEmployee} />
+              <EmployeeList employees={employees} />
+            </>
+          }
+        />
+        <Route
+          path="/employees/:id"
+          element={<EmployeeDetail employees={employees} />}
+        />
+      </Routes>
     </div>
   );
 }
